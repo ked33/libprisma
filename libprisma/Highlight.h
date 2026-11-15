@@ -4,6 +4,7 @@
 #include <boost/regex.hpp>
 #include <map>
 #include <functional>
+#include <memory>
 
 class GrammarPtr;
 class GrammarToken;
@@ -25,7 +26,7 @@ public:
     const Grammar* get() const;
 
 private:
-    std::shared_ptr<LanguageTree> m_tree;
+    std::weak_ptr<LanguageTree> m_tree;
     size_t m_path;
 };
 
@@ -111,7 +112,7 @@ public:
     const Pattern* get() const;
 
 private:
-    std::shared_ptr<LanguageTree> m_tree;
+    std::weak_ptr<LanguageTree> m_tree;
     size_t m_path;
 };
 

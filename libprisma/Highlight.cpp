@@ -16,7 +16,8 @@ const Grammar* GrammarPtr::operator->() const
 
 const Grammar* GrammarPtr::get() const
 {
-    return m_tree->resolveGrammar(m_path);
+    const auto tree = m_tree.lock();
+    return tree ? tree->resolveGrammar(m_path) : nullptr;
 }
 
 PatternPtr::PatternPtr(std::shared_ptr<LanguageTree> tree, size_t path)
@@ -28,7 +29,8 @@ PatternPtr::PatternPtr(std::shared_ptr<LanguageTree> tree, size_t path)
 
 const Pattern* PatternPtr::get() const
 {
-    return m_tree->resolvePattern(m_path);
+    const auto tree = m_tree.lock();
+    return tree ? tree->resolvePattern(m_path) : nullptr;
 }
 
 const Grammar* Pattern::inside() const
