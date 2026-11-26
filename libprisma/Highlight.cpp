@@ -33,6 +33,11 @@ const Pattern* PatternPtr::get() const
     return tree ? tree->resolvePattern(m_path) : nullptr;
 }
 
+std::shared_ptr<Pattern> PatternRaw::realize()
+{
+    return std::make_shared<Pattern>(m_regex, m_flags, m_lookbehind, m_greedy, m_alias, m_inside);
+}
+
 const Grammar* Pattern::inside() const
 {
     if (m_inside)
